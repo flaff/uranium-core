@@ -1,5 +1,5 @@
 function safeParse(data) {
-    return (data && data.constructor && data.constructor === Number) ? String(data) : data;
+    return (typeof data === 'number') ? String(data) : data;
 }
 
 function proxyRequest(proxyResponse, modifier) {
