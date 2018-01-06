@@ -19,13 +19,13 @@ const
     GPIO_VALUE_SET_URL = 'GPIO/{{gpio}}/value/{{value}}';
 
 GpioAPI.interceptors.request.use(function (request) {
-    logUtils.log('[gpio] Request', request);
+    logUtil.log('[gpio-proxy]', request.method, request.url, request.data || '<none>');
     return request;
 });
 
-GpioAPI.interceptors.request.use(function (respose) {
-    logUtils.log('[gpio] Response', respose);
-    return respose;
+GpioAPI.interceptors.response.use(function (response) {
+    logUtil.log('[gpio-proxy] response', response.data);
+    return response;
 });
 
 function genericGPIOProxy(method, url, params) {

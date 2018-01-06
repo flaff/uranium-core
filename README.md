@@ -2,6 +2,17 @@
 
 Backend for raspberry-pi
 
+## quick deploy with dependencies installed
+Git, nodejs and forever are needed.
+```bash
+cd /usr/share
+git pull https://github.com/flaff/uranium-core.git
+cd uranium-core
+npm install
+forever start index.js
+```
+
+
 ## environmental gpio dependencies
 
 Skip if using other service for handling GPIO (e.g. webiopi)
