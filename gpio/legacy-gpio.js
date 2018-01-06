@@ -5,12 +5,16 @@ const logUtil = require('./../utils/log-util');
 module.exports = function registerLegacyGPIO (app) {
     logUtil.log('[gpio-legacy] registering module');
 
+    function logFail(response) {
+        logUtil.log('[gpio-legacy] FAIL ', response);
+    }
+
     ['get', 'post'].forEach(function (method) {
         logUtil.log('[gpio-legacy] registering method', method);
         app[method](/\/GPIO\/*/, function (request, response) {
             gpio.genericGPIOProxy(method, request.url)
                 .then(proxyUtil.proxyRequest(response))
-                .catch(proxyUtil.proxyRequest(response))
+                .catch(proxyUtil.proxyRequestFailHandler(response, logFail))
         });
     });
 };

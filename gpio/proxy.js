@@ -23,11 +23,6 @@ GpioAPI.interceptors.request.use(function (request) {
     return request;
 });
 
-GpioAPI.interceptors.response.use(function (response) {
-    logUtil.log('[gpio-proxy] response', response.data);
-    return response;
-});
-
 function genericGPIOProxy(method, url, params) {
     return GpioAPI[method](url, params);
 }
