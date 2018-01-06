@@ -1,0 +1,22 @@
+{
+  "name": "uranium-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js",
+    "run-dev": "nodemon index.js",
+    "run-service": "forever start index.js",
+    "stop-service": "forever stop index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.8"
+  }
+}
