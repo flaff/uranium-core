@@ -1,11 +1,23 @@
+var enabled = false;
+
 function defaultLogger() {
     return console.log.apply(this, arguments);
 }
 
 function log() {
-    return defaultLogger.apply(this, arguments);
+    return enabled && defaultLogger.apply(this, arguments);
+}
+
+function enable() {
+    enabled = true;
+}
+
+function disable() {
+    enabled = false;
 }
 
 module.exports = {
-    log: log
+    log: log,
+    enable: enable,
+    disable: disable
 };
