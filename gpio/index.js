@@ -23,7 +23,7 @@ function getGPIOById(id) {
     }
 }
 
-gpios[0].addCycle(+momentUtil.getTimeFromString('17:00'), +momentUtil.getTimeFromString('18:00'));
+gpios[0].addCycle(+momentUtil.getTimeFromString('09:00'), +momentUtil.getTimeFromString('17:00'));
 
 function cycleCheckGPIOs() {
     const time = momentUtil.getCurrentTime();

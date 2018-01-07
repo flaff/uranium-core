@@ -67,9 +67,9 @@ GPIO.prototype.cycleCheck = function (moment) {
             }
 
             if (i < this.cycles.length - 1) {
-                timeToNextCycle = moment - this.cycles[i].to;
+                timeToNextCycle = this.cycles[i].from - moment;
             } else {
-                timeToNextCycle = ((moment < midnight) ? midnight : -midnight) + this.cycles[i].from;
+                timeToNextCycle = this.cycles[i].from - moment + ((moment < midnight) ? midnight : -midnight);
             }
         }
 
