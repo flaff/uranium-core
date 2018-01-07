@@ -5,9 +5,23 @@ const config = require('./../config');
 
 const gpios = [];
 
+const HttpStatus = {
+    ACCEPTED: 202,
+    NOT_MODIFIED: 304,
+    NOT_FOUND: 404
+};
+
 gpios.push(new GPIOModel(17));
 gpios.push(new GPIOModel(27));
 gpios.push(new GPIOModel(22));
+
+function getGPIOById(id) {
+    for (var i = 0; i < gpios.length; i++) {
+        if (gpios[i].id === id) {
+            return gpios[i];
+        }
+    }
+}
 
 gpios[0].addCycle(+momentUtil.getTimeFromString('09:00'), +momentUtil.getTimeFromString('17:00'));
 
@@ -32,6 +46,18 @@ function registerGPIOApi(app) {
     app.get('/api/gpio', function (request, response) {
         logUtil.log('[gpio]', request.url);
         response.send(gpios);
+    });
+
+    app.post('/api/gpio', function (request, response) {
+        const gpio = getGPIOById(request.body.id),
+            status = gpio ?
+                (request.body.value === gpio.value ?
+                    HttpStatus.NOT_MODIFIED : HttpStatus.ACCEPTED) : HttpStatus.NOT_FOUND;
+
+        logUtil.log('[gpio]', request.url, request.body, '->', status);
+
+        gpio && gpio.setValue(request.body.value);
+        response.sendStatus(status);
     });
 }
 
