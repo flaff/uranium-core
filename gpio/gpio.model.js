@@ -1,5 +1,6 @@
 const legacyGPIO = require('./legacy-gpio.proxy');
 const logUtil = require('./../utils/log-util');
+const momentUtil = require('./../utils/moment-util');
 
 function GPIO (id, origin) {
     this.id = id;
@@ -8,6 +9,7 @@ function GPIO (id, origin) {
     this.direction = null;
     this.forceValue = null;
     this.cycles = null;
+    this.timeToNextCycle = null;
 }
 
 GPIO.prototype.updateLegacy = function (gpio) {
@@ -45,18 +47,28 @@ GPIO.prototype.forceValue = function (value) {
 };
 
 GPIO.prototype.cycleCheck = function (moment) {
-    var shouldBeEnabled = false;
+    var shouldBeEnabled = false,
+        timeToNextCycle = null;
 
     if (this.forceValue !== null) {
         this.value !== this.forceValue && this.setValue(this.forceValue);
     }
     else if (this.cycles && this.cycles.length) {
+        const midnight = momentUtil.getTimeFromString('01:00'); // todo
+
         for (var i = 0; i < this.cycles.length; i++) {
             const isWithinCycle = (+moment > this.cycles[i].from && +moment < this.cycles[i].to);
 
             if (isWithinCycle) {
+                timeToNextCycle = moment - this.cycles[i].to;
                 shouldBeEnabled = true;
                 break;
+            }
+
+            if (i < this.cycles.length - 1) {
+                timeToNextCycle = moment - this.cycles[i].to;
+            } else {
+                timeToNextCycle = ((moment < midnight) ? midnight : -midnight) + this.cycles[i].from - moment;
             }
         }
 
@@ -64,7 +76,11 @@ GPIO.prototype.cycleCheck = function (moment) {
             logUtil.log('[gpio] changing', this.id, 'by cycle to', shouldBeEnabled);
             this.setValue(shouldBeEnabled);
         }
+    } else {
+        timeToNextCycle = null;
     }
+
+    this.timeToNextCycle = timeToNextCycle;
 };
 
 module.exports = GPIO;

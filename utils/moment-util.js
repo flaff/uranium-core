@@ -5,11 +5,11 @@ function stripDate(moment) {
 }
 
 function getCurrentTime() {
-    return stripDate(moment());
+    return stripDate(moment.utc());
 }
 
 function getTimeFromString(string) {
-    return stripDate(moment(string, 'HH:mm'));
+    return stripDate(moment.utc(string, 'HH:mm'));
 }
 
 module.exports = {

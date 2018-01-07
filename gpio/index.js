@@ -61,6 +61,7 @@ function registerGPIOApi(app) {
     });
 }
 
+cycleCheckGPIOs();
 setInterval(cycleCheckGPIOs, config.cycleInterval);
 
 module.exports = {
