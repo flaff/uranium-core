@@ -57,10 +57,11 @@ GPIO.prototype.cycleCheck = function (moment) {
         const midnight = momentUtil.getTimeFromString('01:00'); // todo
 
         for (var i = 0; i < this.cycles.length; i++) {
-            const isWithinCycle = (+moment > this.cycles[i].from && +moment < this.cycles[i].to);
+            const isWithinCycle = (moment >= this.cycles[i].from && moment < this.cycles[i].to);
 
             if (isWithinCycle) {
-                timeToNextCycle = moment - this.cycles[i].to;
+                logUtil.log('[gpio]', moment, this.id, 'is within cycle', this.cycles[i].from, this.cycles[i].to);
+                timeToNextCycle = this.cycles[i].to - moment;
                 shouldBeEnabled = true;
                 break;
             }
@@ -68,7 +69,7 @@ GPIO.prototype.cycleCheck = function (moment) {
             if (i < this.cycles.length - 1) {
                 timeToNextCycle = moment - this.cycles[i].to;
             } else {
-                timeToNextCycle = ((moment < midnight) ? midnight : -midnight) + this.cycles[i].from - moment;
+                timeToNextCycle = ((moment < midnight) ? midnight : -midnight) + this.cycles[i].from;
             }
         }
 

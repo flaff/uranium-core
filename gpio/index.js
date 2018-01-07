@@ -23,10 +23,10 @@ function getGPIOById(id) {
     }
 }
 
-gpios[0].addCycle(+momentUtil.getTimeFromString('09:00'), +momentUtil.getTimeFromString('17:00'));
+gpios[0].addCycle(+momentUtil.getTimeFromString('17:00'), +momentUtil.getTimeFromString('18:00'));
 
 function cycleCheckGPIOs() {
-    const time = +momentUtil.getCurrentTime();
+    const time = momentUtil.getCurrentTime();
     for (var i = 0; i < gpios.length; i++) {
         gpios[i].cycleCheck(time);
     }
