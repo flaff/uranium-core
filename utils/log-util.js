@@ -1,4 +1,4 @@
-var enabled = false;
+var enabled = true;
 
 function defaultLogger() {
     return console.log.apply(this, arguments);
