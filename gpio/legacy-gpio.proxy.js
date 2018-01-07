@@ -1,10 +1,11 @@
 const logUtil = require('./../utils/log-util');
+const config = require('./../config');
 
 const
     urlUtil = require('../utils/url-util.js'),
     axios = require('axios'),
 
-    GPIO_API_URL = 'http://192.168.3.14:8010/',
+    GPIO_API_URL = config.legacyAPIAddress + '/',
     GPIO_API_TIMEOUT = 10000,
 
     GPIO_API_CONFIG = {

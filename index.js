@@ -1,18 +1,20 @@
 "use strict";
 const express = require('express');
+const config = require('./config.js');
+const logUtil = require('./utils/log-util.js');
 
 const registerLegacyGPIOMethods = require('./gpio/legacy-gpio.register.js');
 const GPIO = require('./gpio/index');
 
-const app = express(),
-    APP_PORT = 80;
+const app = express();
+
+!config.logging && logUtil.disable();
 
 registerLegacyGPIOMethods(app);
-
 GPIO.registerGPIOApi(app);
 
-app.use(express.static('public'));
+app.use(express.static(config.webAppDir));
 
-app.listen(APP_PORT, function () {
-    console.log('[uranium] started listening at port', APP_PORT);
+app.listen(config.serverPort, function () {
+    logUtil.log('[uranium] started listening at port', config.serverPort);
 });

@@ -10,8 +10,6 @@ gpios.push(new GPIOModel(22));
 
 gpios[0].addCycle(+momentUtil.getTimeFromString('09:00'), +momentUtil.getTimeFromString('17:00'));
 
-console.log(JSON.stringify(gpios));
-
 function cycleCheckGPIOs() {
     const time = +momentUtil.getCurrentTime();
     for (var i = 0; i < gpios.length; i++) {
