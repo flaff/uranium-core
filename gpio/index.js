@@ -1,6 +1,7 @@
 const GPIOModel = require('./gpio.model');
 const momentUtil = require('./../utils/moment-util');
 const logUtil = require('./../utils/log-util');
+const config = require('./../config');
 
 const gpios = [];
 
@@ -34,7 +35,7 @@ function registerGPIOApi(app) {
     });
 }
 
-setInterval(cycleCheckGPIOs, 1000);
+setInterval(cycleCheckGPIOs, config.cycleInterval);
 
 module.exports = {
     cycleCheckGPIOs: cycleCheckGPIOs,
