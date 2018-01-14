@@ -18,14 +18,19 @@ function refreshCache(station) {
                 StationCache.error = true;
             } else {
                 StationCache = {
-                    error: true
+                    error: true,
+                    id: null,
+                    indexLevel: null,
+                    compounds: null
                 };
             }
         });
 }
 
 function addStationName() {
-    StationCache.name = StationsCache.asMap[StationCache.id].stationName;
+    if (StationCache && StationsCache && StationsCache.asMap[StationCache.id]) {
+        StationCache.name = StationsCache.asMap[StationCache.id].stationName;
+    }
 }
 
 
