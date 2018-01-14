@@ -33,6 +33,7 @@ Provider.getAllStations()
     .then(function (response) {
         StationsCache = Fragment.parseStationsListResponse(response.data);
         refreshCache(CITY_ID).then(addStationName);
+    });
 
 setInterval(function () {
     refreshCache(CITY_ID);
