@@ -36,7 +36,7 @@ Provider.getAllStations()
     });
 
 setInterval(function () {
-    refreshCache(CITY_ID);
+    refreshCache(CITY_ID).then(addStationName);
 }, ONE_HOUR_MS);
 
 function getStationInfo(station) {
