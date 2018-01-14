@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const config = require('./config.js');
 const logUtil = require('./utils/log-util.js');
 
-const registerLegacyGPIOMethods = require('./gpio/legacy-gpio.register.js');
+const registerLegacyGPIOMethods = require('./gpio/legacy-gpio.register');
+const registerPollutionMethods = require('./pollution/pollution.register');
 const GPIO = require('./gpio/index');
 
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 registerLegacyGPIOMethods(app);
+registerPollutionMethods(app);
 GPIO.registerGPIOApi(app);
 
 app.use(express.static(config.webAppDir));
