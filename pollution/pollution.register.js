@@ -10,4 +10,6 @@ function register(app) {
     });
 }
 
-module.exports = register;
+module.exports = {
+    register: register
+};

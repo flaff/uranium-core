@@ -3,7 +3,7 @@ const proxyUtil = require('../utils/proxy-util.js');
 const logUtil = require('./../utils/log-util');
 const gpio = require('./index');
 
-module.exports = function registerLegacyGPIO (app) {
+function registerLegacyGPIO (app) {
     logUtil.log('[gpio-legacy] registering module');
 
     function logFail(response) {
@@ -29,4 +29,8 @@ module.exports = function registerLegacyGPIO (app) {
     gpioProxy.getAllGPIOs('get')
         .then(gpio.updateGPIOsByLegacyApi)
         .catch(function () {});
+};
+
+module.exports = {
+    register: registerLegacyGPIO
 };

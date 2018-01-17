@@ -5,7 +5,7 @@ const
     urlUtil = require('../utils/url-util.js'),
     axios = require('axios'),
 
-    GPIO_API_URL = config.legacyAPIAddress + '/',
+    GPIO_API_URL = config.LEGACY_API_ADDRESS + '/',
     GPIO_API_TIMEOUT = 10000,
 
     GPIO_API_CONFIG = {

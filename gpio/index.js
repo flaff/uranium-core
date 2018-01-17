@@ -62,10 +62,10 @@ function registerGPIOApi(app) {
 }
 
 cycleCheckGPIOs();
-setInterval(cycleCheckGPIOs, config.cycleInterval);
+setInterval(cycleCheckGPIOs, config.CYCLE_INTERVAL);
 
 module.exports = {
     cycleCheckGPIOs: cycleCheckGPIOs,
     updateGPIOsByLegacyApi: updateGPIOsByLegacyApi,
-    registerGPIOApi: registerGPIOApi
+    register: registerGPIOApi
 };
