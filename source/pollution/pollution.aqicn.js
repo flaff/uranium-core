@@ -5,8 +5,8 @@ import * as Fragment from './pollution.aqicn.fragment';
 import * as Cache from './pollution.aqicn.cache';
 
 const update = () => Provider.fetch()
-    .then(r => Cache.update(Fragment.create(r)) && log('[pollution] cache updated'))
-    .catch(error => log('[pollution] ERROR fetch', error));
+    .then(r => Provider.validate(r) && Cache.update(Fragment.create(r)) && log('[pollution] cache updated'))
+    .catch(error => log('[pollution] @update', error));
 
 update();
 setInterval(update, Config.POLLUTION_UPDATE_INTERVAL);

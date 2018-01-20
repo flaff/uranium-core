@@ -1,7 +1,6 @@
 const
     axios = require('axios'),
     UrlUtil = require('../utils/url-util'),
-    LogUtil = require('../utils/log-util'),
     Config = require('../config'),
 
     AIR_API_URL = 'http://api.waqi.info/',
@@ -27,14 +26,22 @@ function getByCoordinates(latitude, longitude, token) {
     }));
 }
 
-function getById(idx = Config.AQICN_STATION_IDX, token = Config.AQICN_TOKEN) {
+const validate = response => {
+    if (response.data.status === 'error') {
+        throw new Error(response.data.data);
+    }
+    return true;
+};
+
+function fetch(idx = Config.AQICN_STATION_IDX, token = Config.AQICN_TOKEN) {
     return AirAPI.get(UrlUtil.setParams(FEED_URL, {
         params: STATION_ID_PARAMS,
         idx, token
-    }));
+    }))
 }
 
 
 module.exports = {
-    fetch: getById
+    fetch: fetch,
+    validate: validate
 };
