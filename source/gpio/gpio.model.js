@@ -1,6 +1,6 @@
 const legacyGPIO = require('./legacy-gpio.proxy');
-const logUtil = require('./../utils/log-util');
-const momentUtil = require('./../utils/moment-util');
+const logUtil = require('../utils/log-util');
+const momentUtil = require('../utils/moment-util');
 
 function GPIO (id, origin) {
     this.id = id;

@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js",
-    "run-dev": "nodemon index.js",
-    "run-service": "forever start index.js",
-    "stop-service": "forever stop index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon --exec babel-node source/index.js",
+    "start": "forever start source/index.js",
+    "stop": "forever stop source/index.js",
+    "build": "rimraf ./dist && mkdir dist && babel -d ./dist ./source -s"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +19,11 @@
     "moment": "^2.20.1"
   },
   "devDependencies": {
-    "nodemon": "^1.14.8"
+    "@babel/cli": "^7.0.0-beta.38",
+    "@babel/core": "^7.0.0-beta.38",
+    "@babel/node": "^7.0.0-beta.38",
+    "@babel/preset-env": "^7.0.0-beta.38",
+    "nodemon": "^1.14.8",
+    "rimraf": "^2.6.2"
   }
 }

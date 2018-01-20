@@ -1,10 +1,11 @@
 const
     moment = require('moment'),
+    Converter = require('./converters'),
     KRAKOW_ID = 415,
     COMPOUNDS = ['st', 'so2', 'no2', 'co', 'pm10', 'pm25', 'o3', 'c6h6'],
     INDEX_RESPONSE_DATE = 'YYYY-MM-DD HH:mm:ss';
 
-function indexResponseToPollutionFragment (indexResponse) {
+function indexResponseToPollutionFragment(indexResponse) {
     const response = {},
         data = indexResponse.data;
 
@@ -17,6 +18,7 @@ function indexResponseToPollutionFragment (indexResponse) {
             response.compounds.push({
                 name: compound,
                 indexLevel: data[compound + 'IndexLevel'].id,
+                aqi: Converter.polishIndexLeveltoAQI(data[compound + 'IndexLevel'].id),
                 indexLevelName: data[compound + 'IndexLevel'].indexLevelName,
                 dateString: data[compound + 'CalcDate'],
                 date: +moment(data[compound + 'CalcDate'], INDEX_RESPONSE_DATE)
@@ -24,13 +26,13 @@ function indexResponseToPollutionFragment (indexResponse) {
         }
     });
 
-    var indexLevelSum = 0;
+    var aqiSum = 0;
     for (var i = 0; i < response.compounds.length; i++) {
-        indexLevelSum += response.compounds[i].indexLevel;
+        aqiSum += response.compounds[i].aqi;
     }
 
-    response.indexLevel = 1 + indexLevelSum / response.compounds.length;
-    response.indexLevel = Math.floor(10 * response.indexLevel) / 10;
+    response.aqi = indexLevelSum / response.compounds.length;
+    response.aqi = Math.floor(10 * response.aqi) / 10;
 
     return response;
 }
@@ -53,6 +55,6 @@ function parseStationsListResponse(stationsList) {
 }
 
 module.exports = {
-    indexResponseToPollutionFragment: indexResponseToPollutionFragment,
+    create: indexResponseToPollutionFragment,
     parseStationsListResponse: parseStationsListResponse
 };

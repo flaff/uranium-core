@@ -6,9 +6,9 @@ const config = require('./config.js');
 const logUtil = require('./utils/log-util.js');
 
 const LegacyGPIO = require('./gpio/legacy-gpio.register');
-const Pollution = require('./pollution/pollution.register');
-const GPIO = require('./gpio');
-const Miio = require('./miio');
+const Pollution = require('./pollution/register');
+const GPIO = require('./gpio/index');
+const Miio = require('./miio/index');
 
 
 !config.LOGGER_ENABLED && logUtil.disable();

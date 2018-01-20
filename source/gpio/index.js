@@ -1,7 +1,7 @@
 const GPIOModel = require('./gpio.model');
-const momentUtil = require('./../utils/moment-util');
-const logUtil = require('./../utils/log-util');
-const config = require('./../config');
+const momentUtil = require('../utils/moment-util');
+const logUtil = require('../utils/log-util');
+const config = require('../config');
 
 const gpios = [];
 

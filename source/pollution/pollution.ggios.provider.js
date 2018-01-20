@@ -23,11 +23,11 @@ function getAllStations() {
 
 
 function getStationIndexes(station) {
-    return AirAPI.get(UrlUtil.setURLParams(INDEX_URL, {station: station}));
+    return AirAPI.get(UrlUtil.setParams(INDEX_URL, {station: station}));
 }
 
 function getStationSensors(station) {
-    return AirAPI.get(UrlUtil.setURLParams(SENSORS_URL, {station: station}));
+    return AirAPI.get(UrlUtil.setParams(SENSORS_URL, {station: station}));
 }
 
 

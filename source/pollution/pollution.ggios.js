@@ -1,6 +1,6 @@
 const
-    Provider = require('./pollution.provider'),
-    Fragment = require('./pollution.fragment'),
+    Provider = require('./pollution.ggios.provider'),
+    Fragment = require('./pollution.ggios.fragment'),
     ONE_HOUR_MS = 3.6e6,
     CITY_ID = 401;
 
@@ -11,7 +11,7 @@ var StationCache = null,
 function refreshCache(station) {
     return Provider.getStationIndexes(station)
         .then(function (response) {
-            StationCache = Fragment.indexResponseToPollutionFragment(response);
+            StationCache = Fragment.create(response);
         })
         .catch(function () {
             if (StationCache) {

@@ -8,5 +8,5 @@ function setURLParams(url, params) {
 }
 
 module.exports = {
-    setURLParams: setURLParams
+    setParams: setURLParams
 };

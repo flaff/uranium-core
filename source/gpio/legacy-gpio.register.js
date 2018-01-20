@@ -1,6 +1,6 @@
 const gpioProxy = require('./legacy-gpio.proxy.js');
 const proxyUtil = require('../utils/proxy-util.js');
-const logUtil = require('./../utils/log-util');
+const logUtil = require('../utils/log-util');
 const gpio = require('./index');
 
 function registerLegacyGPIO (app) {

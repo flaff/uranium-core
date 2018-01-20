@@ -1,5 +1,5 @@
-const logUtil = require('./../utils/log-util');
-const config = require('./../config');
+const logUtil = require('../utils/log-util');
+const config = require('../config');
 
 const
     urlUtil = require('../utils/url-util.js'),
@@ -29,15 +29,15 @@ function genericGPIOProxy(method, url, params) {
 }
 
 function getAllGPIOs() {
-    return GpioAPI.get(urlUtil.setURLParams(GPIO_GET_ALL_URL));
+    return GpioAPI.get(urlUtil.setParams(GPIO_GET_ALL_URL));
 }
 
 function setGPIOValue(gpio, value) {
-    return GpioAPI.post(urlUtil.setURLParams(GPIO_VALUE_SET_URL, {gpio: gpio, value: value}));
+    return GpioAPI.post(urlUtil.setParams(GPIO_VALUE_SET_URL, {gpio: gpio, value: value}));
 }
 
 function getGPIOValue(gpio) {
-    return GpioAPI.post(urlUtil.setURLParams(GPIO_VALUE_GET_URL, {gpio: gpio}));
+    return GpioAPI.post(urlUtil.setParams(GPIO_VALUE_GET_URL, {gpio: gpio}));
 }
 
 function GPIO(gpio) {
