@@ -8,9 +8,13 @@ const getPurifier = () => purifier;
 
 log('[miio] connecting to purifier');
 
-miio.device({address: Config.PURIFIER_ADDRESS})
+miio.browse();
+
+const connect = () => miio.device({address: Config.PURIFIER_ADDRESS, connectTimeout: Config.MIIO_CONNECT_TIMEOUT})
     .then(device => setPurifier(device) && log('[miio] connected to', purifier.type))
-    .catch(error => log('[miio] error connecting to purifier', error));
+    .catch(error => log('[miio] error connecting to purifier', error) && setTimeout(connect, Config.MIIO_RETRY_TIME));
+
+connect();
 
 module.exports = {
     getPurifier: getPurifier

@@ -5,7 +5,8 @@ function defaultLogger() {
 }
 
 function log() {
-    return enabled && defaultLogger.apply(this, arguments);
+    enabled && defaultLogger.apply(this, arguments);
+    return true;
 }
 
 function enable() {
