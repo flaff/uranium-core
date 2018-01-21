@@ -7,7 +7,7 @@
     "watch": "nodemon --exec babel-node source/index.js",
     "start": "forever start build/index.js",
     "stop": "forever stop build/index.js",
-    "build": "rimraf ./build && mkdir dist && babel -d ./build ./source -s"
+    "build": "rimraf ./build && mkdir build && babel -d ./build ./source -s"
   },
   "author": "",
   "license": "ISC",
